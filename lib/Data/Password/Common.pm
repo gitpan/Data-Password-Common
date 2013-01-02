@@ -4,7 +4,7 @@ use warnings;
 
 package Data::Password::Common;
 # ABSTRACT: Check a password against a list of common passwords
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '0.002'; # VERSION
 
 # Dependencies
 use File::ShareDir;
@@ -12,20 +12,21 @@ use IO::File;
 use Search::Dict;
 use autodie 2.00;
 
-use Sub::Exporter -setup => { exports => ['found'] };
+use Sub::Exporter -setup => { exports => [ 'found' => \&build_finder ] };
 
-my $list_path = File::ShareDir::dist_file( "Data-Password-Common", "common.txt" )
-  or die "Can't locate common passwords file";
+sub build_finder {
+  my ( $class, $name, $arg, $col ) = @_;
+  my $list_path = $arg->{list}
+    || File::ShareDir::dist_file( "Data-Password-Common", "common.txt" );
+  my $list_handle = IO::File->new($list_path);
 
-my $list_handle = IO::File->new($list_path);
-
-sub found {
-  return unless @_;
-  my $password = shift;
-
-  look $list_handle, $password;
-  chomp( my $found = <$list_handle> );
-  return $found eq $password;
+  return sub {
+    return unless @_;
+    my $password = shift;
+    look $list_handle, $password;
+    chomp( my $found = <$list_handle> );
+    return $found eq $password;
+  };
 }
 
 1;
@@ -43,7 +44,7 @@ Data::Password::Common - Check a password against a list of common passwords
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -56,15 +57,19 @@ version 0.001
   # import with aliasing
   use Data::Password::Common found => { -as => "found_common" };
 
+  # custom common password list
+  use Data::Password::Common found => { list => "/usr/share/dict/words" };
+
 =head1 DESCRIPTION
 
-This module installs a list of 62 thousand common passwords and provides
+This module installs a list of over 620,000 common passwords and provides
 a function to check a string against the list.
 
-The password list from InfoSecDaily
-at L<http://www.isdpodcast.com/resources/62k-common-passwords/>
+The password list is taken from InfoSecDaily at
+L<http://www.isdpodcast.com/resources/62k-common-passwords/>. (They claim their
+list is over 62K, but they must have misread their C<wc> output.)
 
-=for Pod::Coverage method_names_here
+=for Pod::Coverage build_finder
 
 =head1 USAGE
 
@@ -76,7 +81,18 @@ Functions are provided via L<Sub::Exporter>.  Nothing is exported by default.
 
 Returns true if the password is in the common passwords list.
 
+=head1 CUSTOMIZING
+
+You may choose an alternate password list to check by passing a C<list> parameter
+during import:
+
+  use Data::Password::Common found => { list => "/usr/share/dict/words" };
+
+The file must be sorted.
+
 =head1 SEE ALSO
+
+=head2 Password checkers
 
 =over 4
 
@@ -94,6 +110,20 @@ L<Data::Password::BasicCheck>
 
 =back
 
+=head2 Lists of common passwords
+
+=over 4
+
+=item *
+
+L<InfoSecDaily|http://www.isdpodcast.com/resources/62k-common-passwords/>
+
+=item *
+
+L<Skull Security|http://www.skullsecurity.org/wiki/index.php/Passwords>
+
+=back
+
 =for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
 
 =head1 SUPPORT
@@ -101,7 +131,7 @@ L<Data::Password::BasicCheck>
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
-at L<https://github.com//data-password-common/issues>.
+at L<https://github.com/dagolden/data-password-common/issues>.
 You will be notified automatically of any progress on your issue.
 
 =head2 Source Code

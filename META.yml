@@ -28,7 +28,7 @@ no_index:
 provides:
   Data::Password::Common:
     file: lib/Data/Password/Common.pm
-    version: 0.001
+    version: 0.002
 requires:
   File::ShareDir: 0
   IO::File: 0
@@ -39,7 +39,7 @@ requires:
   strict: 0
   warnings: 0
 resources:
-  bugtracker: https://github.com//data-password-common/issues
+  bugtracker: https://github.com/dagolden/data-password-common/issues
   homepage: https://metacpan.org/release/Data-Password-Common
   repository: git://github.com/dagolden/data-password-common.git
-version: 0.001
+version: 0.002

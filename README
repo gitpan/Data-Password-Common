@@ -3,7 +3,7 @@ NAME
     passwords
 
 VERSION
-    version 0.001
+    version 0.002
 
 SYNOPSIS
       use Data::Password::Common 'found';
@@ -15,12 +15,16 @@ SYNOPSIS
       # import with aliasing
       use Data::Password::Common found => { -as => "found_common" };
 
-DESCRIPTION
-    This module installs a list of 62 thousand common passwords and provides
-    a function to check a string against the list.
+      # custom common password list
+      use Data::Password::Common found => { list => "/usr/share/dict/words" };
 
-    The password list from InfoSecDaily at
-    <http://www.isdpodcast.com/resources/62k-common-passwords/>
+DESCRIPTION
+    This module installs a list of over 620,000 common passwords and
+    provides a function to check a string against the list.
+
+    The password list is taken from InfoSecDaily at
+    <http://www.isdpodcast.com/resources/62k-common-passwords/>. (They claim
+    their list is over 62K, but they must have misread their "wc" output.)
 
 USAGE
     Functions are provided via Sub::Exporter. Nothing is exported by
@@ -31,18 +35,34 @@ USAGE
 
     Returns true if the password is in the common passwords list.
 
+CUSTOMIZING
+    You may choose an alternate password list to check by passing a "list"
+    parameter during import:
+
+      use Data::Password::Common found => { list => "/usr/share/dict/words" };
+
+    The file must be sorted.
+
 SEE ALSO
+  Password checkers
     *   Data::Password
 
     *   Data::Password::Entropy
 
     *   Data::Password::BasicCheck
 
+  Lists of common passwords
+    *   InfoSecDaily
+        <http://www.isdpodcast.com/resources/62k-common-passwords/>
+
+    *   Skull Security
+        <http://www.skullsecurity.org/wiki/index.php/Passwords>
+
 SUPPORT
   Bugs / Feature Requests
     Please report any bugs or feature requests through the issue tracker at
-    <https://github.com//data-password-common/issues>. You will be notified
-    automatically of any progress on your issue.
+    <https://github.com/dagolden/data-password-common/issues>. You will be
+    notified automatically of any progress on your issue.
 
   Source Code
     This is open source software. The code repository is available for

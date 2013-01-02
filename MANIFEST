@@ -10,7 +10,9 @@ lib/Data/Password/Common.pm
 perlcritic.rc
 share/common.txt
 t/00-compile.t
+t/data/500worst.txt
 t/lookup.t
+t/personalized.t
 xt/author/critic.t
 xt/author/pod-spell.t
 xt/release/distmeta.t
