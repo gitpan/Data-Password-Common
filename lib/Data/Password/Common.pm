@@ -4,7 +4,7 @@ use warnings;
 
 package Data::Password::Common;
 # ABSTRACT: Check a password against a list of common passwords
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 
 # Dependencies
 use File::ShareDir;
@@ -15,18 +15,18 @@ use autodie 2.00;
 use Sub::Exporter -setup => { exports => [ 'found' => \&build_finder ] };
 
 sub build_finder {
-  my ( $class, $name, $arg, $col ) = @_;
-  my $list_path = $arg->{list}
-    || File::ShareDir::dist_file( "Data-Password-Common", "common.txt" );
-  my $list_handle = IO::File->new($list_path);
+    my ( $class, $name, $arg, $col ) = @_;
+    my $list_path = $arg->{list}
+      || File::ShareDir::dist_file( "Data-Password-Common", "common.txt" );
+    my $list_handle = IO::File->new( $list_path, "<:utf8" );
 
-  return sub {
-    return unless @_;
-    my $password = shift;
-    look $list_handle, $password;
-    chomp( my $found = <$list_handle> );
-    return $found eq $password;
-  };
+    return sub {
+        return unless @_;
+        my $password = shift;
+        look $list_handle, $password;
+        chomp( my $found = <$list_handle> );
+        return $found eq $password;
+    };
 }
 
 1;
@@ -38,13 +38,15 @@ __END__
 
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Password::Common - Check a password against a list of common passwords
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -62,7 +64,7 @@ version 0.002
 
 =head1 DESCRIPTION
 
-This module installs a list of over 620,000 common passwords and provides
+This module installs a list of over 557,000 common passwords and provides
 a function to check a string against the list.
 
 The password list is taken from InfoSecDaily at
@@ -131,7 +133,7 @@ L<Skull Security|http://www.skullsecurity.org/wiki/index.php/Passwords>
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
-at L<https://github.com/dagolden/data-password-common/issues>.
+at L<https://github.com/dagolden/Data-Password-Common/issues>.
 You will be notified automatically of any progress on your issue.
 
 =head2 Source Code
@@ -139,9 +141,9 @@ You will be notified automatically of any progress on your issue.
 This is open source software.  The code repository is available for
 public review and contribution under the terms of the license.
 
-L<https://github.com/dagolden/data-password-common>
+L<https://github.com/dagolden/Data-Password-Common>
 
-  git clone git://github.com/dagolden/data-password-common.git
+  git clone https://github.com/dagolden/Data-Password-Common.git
 
 =head1 AUTHOR
 
