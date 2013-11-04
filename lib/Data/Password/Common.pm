@@ -4,7 +4,7 @@ use warnings;
 
 package Data::Password::Common;
 # ABSTRACT: Check a password against a list of common passwords
-our $VERSION = '0.003'; # VERSION
+our $VERSION = '0.004'; # VERSION
 
 # Dependencies
 use File::ShareDir;
@@ -38,7 +38,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -46,7 +46,7 @@ Data::Password::Common - Check a password against a list of common passwords
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
@@ -71,8 +71,6 @@ The password list is taken from InfoSecDaily at
 L<http://www.isdpodcast.com/resources/62k-common-passwords/>. (They claim their
 list is over 62K, but they must have misread their C<wc> output.)
 
-=for Pod::Coverage build_finder
-
 =head1 USAGE
 
 Functions are provided via L<Sub::Exporter>.  Nothing is exported by default.
@@ -82,6 +80,8 @@ Functions are provided via L<Sub::Exporter>.  Nothing is exported by default.
   found($password);
 
 Returns true if the password is in the common passwords list.
+
+=for Pod::Coverage build_finder
 
 =head1 CUSTOMIZING
 
@@ -148,6 +148,10 @@ L<https://github.com/dagolden/Data-Password-Common>
 =head1 AUTHOR
 
 David Golden <dagolden@cpan.org>
+
+=head1 CONTRIBUTOR
+
+superfly1031 <RavetcoFX@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 

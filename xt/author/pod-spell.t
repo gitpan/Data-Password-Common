@@ -14,6 +14,8 @@ InfoSecDaily
 David
 Golden
 dagolden
+superfly1031
+RavetcoFX
 lib
 Data
 Password

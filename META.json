@@ -4,7 +4,7 @@
       "David Golden <dagolden@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.132830",
+   "generated_by" : "Dist::Zilla version 5.001, CPAN::Meta::Converter version 2.132830",
    "license" : [
       "apache_2_0"
    ],
@@ -57,6 +57,10 @@
          }
       },
       "test" : {
+         "recommends" : {
+            "CPAN::Meta" : "0",
+            "CPAN::Meta::Requirements" : "0"
+         },
          "requires" : {
             "ExtUtils::MakeMaker" : "0",
             "File::Spec::Functions" : "0",
@@ -70,7 +74,7 @@
    "provides" : {
       "Data::Password::Common" : {
          "file" : "lib/Data/Password/Common.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       }
    },
    "release_status" : "stable",
@@ -85,7 +89,10 @@
          "web" : "https://github.com/dagolden/Data-Password-Common"
       }
    },
-   "version" : "0.003",
-   "x_authority" : "cpan:DAGOLDEN"
+   "version" : "0.004",
+   "x_authority" : "cpan:DAGOLDEN",
+   "x_contributors" : [
+      "superfly1031 <RavetcoFX@gmail.com>"
+   ]
 }
 

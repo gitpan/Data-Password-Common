@@ -13,7 +13,7 @@ configure_requires:
   ExtUtils::MakeMaker: 6.17
   File::ShareDir::Install: 0.03
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.132830'
+generated_by: 'Dist::Zilla version 5.001, CPAN::Meta::Converter version 2.132830'
 license: apache
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -30,7 +30,7 @@ no_index:
 provides:
   Data::Password::Common:
     file: lib/Data/Password/Common.pm
-    version: 0.003
+    version: 0.004
 requires:
   File::ShareDir: 0
   IO::File: 0
@@ -44,5 +44,7 @@ resources:
   bugtracker: https://github.com/dagolden/Data-Password-Common/issues
   homepage: https://github.com/dagolden/Data-Password-Common
   repository: https://github.com/dagolden/Data-Password-Common.git
-version: 0.003
+version: 0.004
 x_authority: cpan:DAGOLDEN
+x_contributors:
+  - 'superfly1031 <RavetcoFX@gmail.com>'

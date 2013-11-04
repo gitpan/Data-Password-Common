@@ -3,7 +3,7 @@ NAME
     passwords
 
 VERSION
-    version 0.003
+    version 0.004
 
 SYNOPSIS
       use Data::Password::Common 'found';
@@ -74,6 +74,9 @@ SUPPORT
 
 AUTHOR
     David Golden <dagolden@cpan.org>
+
+CONTRIBUTOR
+    superfly1031 <RavetcoFX@gmail.com>
 
 COPYRIGHT AND LICENSE
     This software is Copyright (c) 2012 by David Golden.
